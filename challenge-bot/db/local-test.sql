@@ -10,16 +10,16 @@ CREATE TABLE challenges (
   id serial PRIMARY KEY,
   title text NOT NULL,
   description text NOT NULL,
-  url text NOT NULL
+  url text UNIQUE NOT NULL
 );
 
 INSERT INTO challenges (title, description, url) VALUES 
-('HoneyBooBoo', 'The adventures of King Honey Boo Boo', 'www.reddit.com'),
-('Capt. Morgan', 'The mole TA', 'www.reddit.com'),
-('HoneyBooBoo2', 'Second follow up movie', 'www.reddit.com'),
-('John Wick and the Honey Boo Boo', '15/10 on rotten tomatoes', 'www.reddit.com'),
-('Giant Space Balls', 'XXX release of space balls', 'www.reddit.com'),
-('Saddy Mcface', 'Wear a fake weding ring', 'www.reddit.com');
+('HoneyBooBoo', 'The adventures of King Honey Boo Boo', 'www.reddit.com/1'),
+('Capt. Morgan', 'The mole TA', 'www.reddit.com/2'),
+('HoneyBooBoo2', 'Second follow up movie', 'www.reddit.com/3'),
+('John Wick and the Honey Boo Boo', '15/10 on rotten tomatoes', 'www.reddit.com/4'),
+('Giant Space Balls', 'XXX release of space balls', 'www.reddit.com/5'),
+('Saddy Mcface', 'Wear a fake weding ring', 'www.reddit.com/6');
 
 CREATE TABLE past_challenges (
   id int GENERATED ALWAYS AS IDENTITY (START WITH 100) PRIMARY KEY,
