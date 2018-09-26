@@ -1,6 +1,6 @@
 
 module.exports = {
-  // uses EST
+  // UTC? If not, maybe work from EST or local time?
   CHALLENGE_POST_TIME: {
     hour: 17,
     minute: 30
