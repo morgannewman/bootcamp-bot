@@ -5,6 +5,6 @@ exports.run = (client, message, args) => {
     `**********Executing mongodbtips on ${message.guild.name}**********`
   );
   message.channel.send(
-    '<@98908864933564416> heh heh that\'s right brother grind the tanks'
+    '<@98908864933564416> heh heh that\'s right brother grind the honeybooboo'
   );
 };
