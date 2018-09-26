@@ -23,14 +23,14 @@ const challengeSchedule = schedule.scheduleJob(`${CHALLENGE_POST_TIME.minute},
   ${CHALLENGE_POST_TIME.hour} 17 * * 1-5`, () => {
 
   const challengeChannel = client.guilds.get(SERVER_ID).channels.get(CHANNEL_ID);
-    // expects the db to return a promise that passes an object with id, title, desc, and url
+  // expects the db to return a promise that passes an object with id, title, desc, and url
   challengeInterface.getNewChallenge()
     .then(challengeInfo => {
       const {title, desc, url} = challengeInfo;
       const formattedMessage =
         `**${title}**
         ${desc}
-        ${url}`;
+        <${url}>`;
       challengeChannel.send(formattedMessage);
     })
     .catch(err => {
