@@ -1,4 +1,4 @@
--- psql -U dev -d challenge-bot -f ./challenge-bot/db/challenge-bot.sql
+-- psql -U dev -d challenge-bot -f ./challenge-bot/db/local-test.sql
 
 -- Wipes table so this file can recreate it each time it is ran
 DROP TABLE IF EXISTS upcoming_challenges;
@@ -12,8 +12,6 @@ CREATE TABLE challenges (
   description text NOT NULL,
   url text NOT NULL
 );
-
--- DUMMY DATA HERE
 
 INSERT INTO challenges (title, description, url) VALUES 
 ('HoneyBooBoo', 'The adventures of King Honey Boo Boo', 'www.reddit.com'),
