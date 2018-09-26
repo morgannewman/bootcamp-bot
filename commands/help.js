@@ -16,7 +16,16 @@ exports.run = (client, message, args) => {
 };
 
 function buildCommandList() {
-  var commands = ['!bootcamp', '!mongodbtips', '!help', '!nikolas'];
+  var commands = [
+    '!bootcamp',
+    '!mongodbtips',
+    '!help',
+    '!nikolas',
+    '!chels',
+    '!chris',
+    '!sponge <text>',
+    '!cameron'
+  ];
 
   return commands.join('\n');
 }
