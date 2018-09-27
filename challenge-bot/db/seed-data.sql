@@ -1,4 +1,4 @@
--- psql -U dev -d challenge-bot -f ./challenge-bot/db/local-test.sql
+-- psql -U dev -d challenge-bot -f ./challenge-bot/db/seed-data.sql
 
 -- Wipes table so this file can recreate it each time it is ran
 DROP TABLE IF EXISTS upcoming_challenges;
