@@ -1,5 +1,5 @@
 const {getLastChallenge} = require('../challenge-bot/cache');
-const {generateChallengeMsg} = require('challenge');
+const {generateChallengeMsg} = require('../challenge-bot/challenge');
 
 exports.run = (client, message, args) => {
   getLastChallenge()
