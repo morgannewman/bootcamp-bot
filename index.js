@@ -19,7 +19,7 @@ CommandSystem.load(function() {
 });
 
 client.login(process.env.TOKEN);
-schedule.scheduleJob()
+
 const challengeSchedule = schedule.scheduleJob(
   `${CHALLENGE_POST_TIME.minute},
   ${CHALLENGE_POST_TIME.hour} 17 * * 1-5`,
