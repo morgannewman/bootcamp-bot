@@ -28,15 +28,27 @@ const updateCurrentChallenge = (data) => {
     .then(() => fs.writeFile(currentChallengeFile, JSON.stringify(data, '\n', 1)));
 };
 
+
+/*--------------------------------------------------------------------------------*/
+/* Load json from local data files. If the file doesn't exist return empty object */
+/*--------------------------------------------------------------------------------*/
+
 const getCurrentChallenge = () => {
   return fs.access(currentChallengeFile)
     .then(data => JSON.parse(data))
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(`Could not load ${currentChallengeFile}`);
+      return {};
+    });
 };
 
 const getLastChallenge = () => {
   return fs.access(lastChallengeFile)
-    .then(data => JSON.parse(data));
+    .then(data => JSON.parse(data))
+    .catch(err => {
+      console.log(`Could not load ${lastChallengeFile}`);
+      return {};
+    });
 };
 
 module.exports = {
