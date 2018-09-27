@@ -30,7 +30,8 @@ const updateCurrentChallenge = (data) => {
 
 const getCurrentChallenge = () => {
   return fs.access(currentChallengeFile)
-    .then(data => JSON.parse(data));
+    .then(data => JSON.parse(data))
+    .catch(err => console.log(err));
 };
 
 const getLastChallenge = () => {
