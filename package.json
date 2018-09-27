@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "psql -U dev -d challenge-bot -f ./challenge-bot/db/seed-data.sql"
+  },
+  "engines": {
+    "node": "10.11.0"
   },
   "author": "",
   "license": "ISC",

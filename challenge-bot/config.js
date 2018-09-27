@@ -1,4 +1,3 @@
-
 module.exports = {
   // UTC? If not, maybe work from EST or local time?
   CHALLENGE_POST_TIME: {
@@ -6,6 +5,6 @@ module.exports = {
     minute: 30
   },
 
-  CHANNEL_ID: '494338867567001632',
-  SERVER_ID: '494338867567001629'
+  CHANNEL_ID: '494255143760691200',
+  SERVER_ID: '492865719441162250'
 };

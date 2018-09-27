@@ -29,7 +29,6 @@ module.exports = function CommandSystem() {
       //   // console.log("Message author is bot")
       //   return;
       // }
-
       if (message.content.startsWith('—')) {
         message.content = message.content.replace('—', '--');
       }
@@ -56,7 +55,7 @@ module.exports = function CommandSystem() {
           console.error(err);
         }
       } else {
-        // console.log(`Command does not exist: ${commandName}\n${commandTable}`)
+        //console.log(`Command does not exist: ${commandName}\n${commandTable}`)
       }
     }
   };
