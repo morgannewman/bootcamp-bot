@@ -4,7 +4,7 @@ const client = new Discord.Client();
 const CommandSystem = require('./command-system.js')();
 const {CHALLENGE_POST_TIME} = require('./config');
 const schedule = require('schedule');
-const {fetchDailyChallenge} = require('./challenge-bot/fetch');
+const {fetchDailyChallenge} = require('./challenge-bot/challenge.js');
 
 client.on('ready', () => {
   console.log('Ready!');
