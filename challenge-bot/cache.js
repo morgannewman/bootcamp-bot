@@ -23,10 +23,23 @@ const updateCache = () => {
 };
   
 // Create the new currentChallenge
-const cacheCurrentChallenge = (data) => {
+const updateCurrentChallenge = (data) => {
   return updateCache()
-    .then(() => fs.writeFile(currentChallengeFile, JSON.stringify(data, '\n', 1)))
-    .catch(err => console.error('last error block:\n' + err));
+    .then(() => fs.writeFile(currentChallengeFile, JSON.stringify(data, '\n', 1)));
 };
 
-module.exports = cacheCurrentChallenge;
+const getCurrentChallenge = () => {
+  return fs.access(currentChallengeFile)
+    .then(data => JSON.parse(data));
+};
+
+const getLastChallenge = () => {
+  return fs.access(lastChallengeFile)
+    .then(data => JSON.parse(data));
+};
+
+module.exports = {
+  updateCurrentChallenge,
+  getCurrentChallenge,
+  getLastChallenge
+};
