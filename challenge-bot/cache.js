@@ -29,16 +29,16 @@ const updateCurrentChallenge = (data) => {
 };
 
 
-/*--------------------------------------------------------------------------------*/
-/* Load json from local data files. If the file doesn't exist return empty object */
-/*--------------------------------------------------------------------------------*/
+/*----------------------------------*/
+/* Load json from local data files. */
+/*----------------------------------*/
 
 const getCurrentChallenge = () => {
   return fs.access(currentChallengeFile)
     .then(data => JSON.parse(data))
     .catch(err => {
       console.log(`Could not load ${currentChallengeFile}`);
-      return {};
+      return err;
     });
 };
 
@@ -47,7 +47,7 @@ const getLastChallenge = () => {
     .then(data => JSON.parse(data))
     .catch(err => {
       console.log(`Could not load ${lastChallengeFile}`);
-      return {};
+      return err;
     });
 };
 

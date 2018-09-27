@@ -10,20 +10,29 @@ const fetchDailyChallenge = (client) => {
   // expects the db to return a promise that passes an object with id, title, desc, and url
   return getNewChallenge()
     .then(_challengeInfo => {
+      // update files through cache.js
       challengeInfo = _challengeInfo;
       return updateCurrentChallenge(challengeInfo);
     })
     .then(() => {
-      const {title, desc, url} = challengeInfo;
-      const formattedMessage =
-        `**${title}**
-        ${desc}
-        <${url}>`;
-      challengeChannel.send(formattedMessage);
+      // format and send discord message
+      const msg = generateChallengeMsg(challengeInfo);
+      return challengeChannel.send(msg);
     })
     .catch(err => {
       challengeChannel.send('Uh oh... we couldn\'t load today\'s challenge. That\'s probably a bad sign.');
     });
 };
 
-module.exports = {fetchDailyChallenge};
+// accepts challenge json and returns a string formatted for a discord message
+// used here and in commands folder to format messages
+const generateChallengeMsg = (challenge) => {
+  const {title, desc, url} = challenge;
+  const formattedMessage =
+    `**${title}**
+    ${desc}
+    <${url}>`;
+  return formattedMessage;
+};
+
+module.exports = {fetchDailyChallenge, generateChallengeMsg};
