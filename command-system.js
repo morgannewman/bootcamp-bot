@@ -56,7 +56,7 @@ module.exports = function CommandSystem() {
           console.error(err);
         }
       } else {
-        // console.log(`Command does not exist: ${commandName}\n${commandTable}`)
+        //console.log(`Command does not exist: ${commandName}\n${commandTable}`)
       }
     }
   };

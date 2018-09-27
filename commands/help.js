@@ -25,8 +25,8 @@ function buildCommandList() {
     '!chris',
     '!sponge <text>',
     '!cameron',
-    '!currentChallenge',
-    '!lastChallenge'
+    '!currentchallenge',
+    '!lastchallenge'
   ];
 
   return commands.join('\n');
