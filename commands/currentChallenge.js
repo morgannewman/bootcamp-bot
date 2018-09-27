@@ -15,9 +15,9 @@ exports.run = (client, message, args) => {
   // Reads from the cache (cache.js => currentChallenge.json)
   getCurrentChallenge()
     .then(data => {
-      message.channel.send(
-        'Time to grind Ye Olde Tanks. Today\'s Challenge is Ready!'
-      );
+      // message.channel.send(
+      //   'Time to grind Ye Olde Tanks. Today\'s Challenge is Ready!'
+      // );
       // Generates and sends RichEmbed message
       message.channel.send(generateChannelChallengeMessage(data));
     })

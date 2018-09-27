@@ -1,4 +1,5 @@
 const schedule = require('node-schedule');
+const { sendNewChallenge } = require('./challenge-bot/sendMessages');
 
 var rule = new schedule.RecurrenceRule();
 rule.dayOfWeek = [0, new schedule.Range(1, 5)];
@@ -8,7 +9,7 @@ rule.minute = 30;
 rule.tz = 'UTC';
 
 const newChallengeTimer = schedule.scheduleJob(rule, function() {
-  console.log('Today is recognized by Rebecca Black and Honey Boo Boo!');
+  sendNewChallenge();
 });
 
-module.exports = { newChallengeTimer };
+module.exports = newChallengeTimer;
