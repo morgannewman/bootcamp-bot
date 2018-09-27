@@ -25,3 +25,5 @@ const fetchDailyChallenge = (client) => {
       challengeChannel.send('Uh oh... we couldn\'t load today\'s challenge. That\'s probably a bad sign.');
     });
 };
+
+module.exports = {fetchDailyChallenge};
