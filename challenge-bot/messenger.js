@@ -10,7 +10,6 @@ This module exposes an interface to:
     - This should be used in the command files to respond to
       !currentchallenge and !lastchallenge commands
 */
-
 const Discord = require('discord.js');
 const { CHALLENGE_CHANNEL_ID, SERVER_ID } = require('./config');
 // Load data access layer
@@ -22,13 +21,12 @@ const {
 
 // Get and send the new challenge to the server
 const sendNewChallenge = client => {
+  // look up the server and channel from the config
+  const challengeMessageChannel = getChallengeMessageChannelID(client);
   return (
     setNewChallenge()
       // Broadcast new challenge
       .then(data => {
-        // look up the server and channel from the config
-        const challengeMessageChannel = getChallengeMessageChannelID(client);
-
         // Send the message of the day
         sendMessageOfTheDay(data, challengeMessageChannel);
       })
@@ -44,7 +42,7 @@ const sendMessageOfTheDay = (data, challengeChannel) => {
   // Set the daily channel topic
   setChallengeChannelTopic(data, challengeChannel);
   // Tag everyone
-  pingTheWholeSquad(challengeChannel);
+  // pingTheWholeSquad(challengeChannel);
   // Create and send message to channel
   sendDailyChallengeEmbed(data, challengeChannel);
 };

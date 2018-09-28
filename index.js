@@ -11,8 +11,6 @@ const { challengeSchedule } = require('./challenge-bot/config');
 const { sendNewChallenge } = require('./challenge-bot/messenger');
 
 client.on('ready', () => {
-  sendNewChallenge(client);
-
   const newChallengeTimer = scheduler.scheduleJob(challengeSchedule, () =>
     sendNewChallenge(client)
   );
