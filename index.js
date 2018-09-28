@@ -1,12 +1,21 @@
-const dotenv = require('dotenv').config();
+// Environment variables
+require('dotenv').config();
+// Discord modules
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const CommandSystem = require('./command-system.js')();
-const { CHALLENGE_POST_TIME } = require('./challenge-bot/config.js');
-const schedule = require('node-schedule');
-const { fetchDailyChallenge } = require('./challenge-bot/challenge.js');
+// Challenge schedule modules
+// Runs M-F 1 hour before class ends
+const scheduler = require('node-schedule');
+const { challengeSchedule } = require('./challenge-bot/config');
+const { sendNewChallenge } = require('./challenge-bot/messenger');
 
 client.on('ready', () => {
+  sendNewChallenge(client);
+
+  const newChallengeTimer = scheduler.scheduleJob(challengeSchedule, () =>
+    sendNewChallenge(client)
+  );
   console.log('Ready!');
 });
 
@@ -19,9 +28,3 @@ CommandSystem.load(function() {
 });
 
 client.login(process.env.TOKEN);
-
-const challengeSchedule = schedule.scheduleJob(
-  `${CHALLENGE_POST_TIME.minute},
-  ${CHALLENGE_POST_TIME.hour} 17 * * 1-5`,
-  fetchDailyChallenge
-);
