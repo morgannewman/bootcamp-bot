@@ -20,41 +20,59 @@ const {
   setNewChallenge
 } = require('./data');
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  TODO: Get this working. Desired behavior:
-    1. Run getNewChallenge() to update the data layer and receive the new challenge obj
-    2. Send a new message to the channel tagging everyone
-      - @everyone Time to grind Ye Olde Tanks. Today's Challenge is Ready!
-    3. Send a second message that reuses sendCurrentChallenge() to send the challenge
-    card in chat
-    4. Updates the challenge channel description with the new challenge
-      - Today's challenge - https://leetcode.com/some-bullshit-url
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+// Get and send the new challenge to the server
 const sendNewChallenge = client => {
-  console.log('We running sendNewChallenge');
-  // look up the server and channel from the config
-  const challengeMessageChannel = client.guilds
-    .find(guild => guild.id === SERVER_ID)
-    .channels.find(channel => channel.id === CHALLENGE_CHANNEL_ID);
-
   return (
     setNewChallenge()
       // Broadcast new challenge
       .then(data => {
-        // Set the daily channel topic
-        challengeMessageChannel.setTopic(generateChallengeChannelTopic(data));
+        // look up the server and channel from the config
+        const challengeMessageChannel = getChallengeMessageChannelID(client);
 
-        // Create and send message to channel
-        return challengeMessageChannel.send(generateChallengeEmbed(data));
+        // Send the message of the day
+        sendMessageOfTheDay(data, challengeMessageChannel);
       })
       .catch(err => {
         console.error(err);
-        challengeMessageChannel.send(
-          `OOPSIE WOOPSIE!! Uwu We made a fucky wucky!! A wittle fucko boingo!
-          The code monkeys at our headquarters are working VEWY HAWD to fix this!`
-        );
+        sendMessageOfTheDayErrorMessage(challengeMessageChannel);
       })
   );
+};
+
+/***** Message of the day *****/
+const sendMessageOfTheDay = (data, challengeChannel) => {
+  // Set the daily channel topic
+  setChallengeChannelTopic(data, challengeChannel);
+  // Tag everyone
+  pingTheWholeSquad(challengeChannel);
+  // Create and send message to channel
+  sendDailyChallengeEmbed(data, challengeChannel);
+};
+
+// MOTD error message
+const sendMessageOfTheDayErrorMessage = challengeChannel => {
+  challengeChannel.send(
+    `OOPSIE WOOPSIE!! Uwu We made a fucky wucky!! A wittle fucko boingo!
+    The code monkeys at our headquarters are working VEWY HAWD to fix this!`
+  );
+};
+
+/*** MOTD helpers ***/
+// Sets challenge channel topic
+const setChallengeChannelTopic = (data, challengeChannel) => {
+  challengeChannel.setTopic(generateChallengeChannelTopic(data));
+};
+
+// Pings @everyone
+const pingTheWholeSquad = challengeChannel => {
+  challengeChannel.send(
+    "Get Ready to Grind Ye Olde Tanks. Today's Challenge is Ready! @everyone"
+  );
+};
+
+// Sends the daily challenge's embed to the challenge channel
+const sendDailyChallengeEmbed = (data, challengeChannel) => {
+  challengeChannel.send(generateChallengeEmbed(data));
 };
 
 /***** Current/previous challenge functions *****/
@@ -84,7 +102,7 @@ const sendLastChallenge = (client, message, args) => {
     });
 };
 
-/***** Message embed functions *****/
+/***** Message embed utilities *****/
 // Generates embed
 const generateChallengeEmbed = data => {
   return new Discord.RichEmbed()
@@ -117,6 +135,14 @@ const generateChallengeLink = challenge => {
   return challenge.url;
 };
 
+/***** Utilities *****/
+const getChallengeMessageChannelID = client => {
+  return client.guilds
+    .find(guild => guild.id === SERVER_ID)
+    .channels.find(channel => channel.id === CHALLENGE_CHANNEL_ID);
+};
+
+// Export modules
 module.exports = {
   sendNewChallenge,
   sendCurrentChallenge,
